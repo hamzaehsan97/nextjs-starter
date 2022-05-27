@@ -1,0 +1,30 @@
+//Global variables for all pages
+
+//Link variables
+$link-color: #0070f3;
+$link-color-hover: #0050a3;
+$link-color-active: #004081;
+$link-color-visited: #004081;
+$link-color-focus: #004081;
+$link-color-disabled: #bdbdbd;
+
+//Dark theme variables
+$dark-theme-background: #303030;
+$dark-theme-text: #fafafa;
+$dark-theme-text-muted: #bdbdbd;
+$dark-theme-text-light: #fafafa;
+
+//Light theme variables
+$light-theme-background: #fafafa;
+$light-theme-text: #424242;
+$light-theme-text-muted: #757575;
+$light-theme-text-light: #424242;
+
+//Primary theme variables
+$primary-color: #fafafa;
+
+
+//Export variables
+:export {
+  primaryColor: $primary-color;
+}
