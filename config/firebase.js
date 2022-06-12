@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { getStorage, ref } from "firebase/storage";
 
 // Add your firebase config here
 // Initialize your app with a configuration object
@@ -19,3 +20,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app); // <-- Add this line, once configured
 export const auth = getAuth();
+// Get a reference to the storage service, which is used to create references in your storage bucket
+export const storage = getStorage();

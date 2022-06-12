@@ -2,7 +2,7 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Grid from "@mui/material/Grid";
 import { useAuth } from "../context/authContext";
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import { useRouter } from "next/router";
 const NavBar = () => {
   const { user, logout } = useAuth();
@@ -38,13 +38,16 @@ const NavBar = () => {
             }}
           >
             {user ? (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => tryLogout()}
-              >
-                Log out
-              </Button>
+              <>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => tryLogout()}
+                >
+                  Log out
+                </Button>
+                <Avatar alt={user.displaName} src={user.photoURL} />
+              </>
             ) : (
               <>
                 <span>
