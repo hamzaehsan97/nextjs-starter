@@ -1,0 +1,6 @@
+Add styling docs here
+
+1. Overview
+    1a. SCSS
+2. Variables Policy
+3. Globals vs component level styling
