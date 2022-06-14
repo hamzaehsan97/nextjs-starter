@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import "../styles/globals.scss";
 import ProtectedRoutes from "../components/ProtectedRoutes";
 import UnProtectedandLoggedIn from "../components/UnProtectedandLoggedIn";
+import ModalProvider from "../context/modalProvider";
 
 function MyApp({ Component, pageProps }) {
   //Add all unprotected routes here
@@ -13,24 +14,26 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <AuthContextProvider>
-        <NavBar />
-        {/* Check for path type and route accordingly */}
-        {unProtectedRoutes.includes(router.pathname) ? (
-          <>
-            {user ? (
-              <UnProtectedandLoggedIn>
-                {" "}
-                <Component {...pageProps} />{" "}
-              </UnProtectedandLoggedIn>
-            ) : (
+        <ModalProvider>
+          <NavBar />
+          {/* Check for path type and route accordingly */}
+          {unProtectedRoutes.includes(router.pathname) ? (
+            <>
+              {user ? (
+                <UnProtectedandLoggedIn>
+                  {" "}
+                  <Component {...pageProps} />{" "}
+                </UnProtectedandLoggedIn>
+              ) : (
+                <Component {...pageProps} />
+              )}
+            </>
+          ) : (
+            <ProtectedRoutes>
               <Component {...pageProps} />
-            )}
-          </>
-        ) : (
-          <ProtectedRoutes>
-            <Component {...pageProps} />
-          </ProtectedRoutes>
-        )}
+            </ProtectedRoutes>
+          )}
+        </ModalProvider>
       </AuthContextProvider>
     </>
   );
