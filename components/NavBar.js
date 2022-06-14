@@ -7,12 +7,15 @@ import { Avatar, Button } from "@mui/material";
 import { useRouter } from "next/router";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-
+import { ModalContext } from "../context/modalProvider";
+import { useContext } from "react";
+import LogoutModal from "./modals/LogoutModal";
 const NavBar = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const { openModal, closeModal } = useContext(ModalContext);
 
   const tryLogout = () => {
     try {
@@ -78,7 +81,20 @@ const NavBar = () => {
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>Settings</MenuItem>
-                  <MenuItem onClick={() => tryLogout()}>Logout</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      openModal(
+                        <LogoutModal
+                          open={true}
+                          closeFunc={closeModal}
+                          openModal={openModal}
+                        />
+                      );
+                      setAnchorEl(null);
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
                 </Menu>
               </>
             ) : (
