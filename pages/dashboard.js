@@ -1,7 +1,10 @@
 import react, { useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useEffect } from "react";
-import { getStorage, ref } from "firebase/storage";
+import Drawer from "../components/Drawer";
+import Grid from "@mui/material/Grid";
+import DashProvider from "../context/dashProvider";
+
 const dashboard = () => {
   const { user, changeProfilePhoto } = useAuth();
 
@@ -19,11 +22,24 @@ const dashboard = () => {
   };
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-      <button onClick={handleProfilePhotoChange}>Upload</button>
-    </div>
+    <Grid
+      container
+      direction="row"
+      justifyContent="space-between"
+      alignItems="flex-start"
+    >
+      <Grid item>
+        <Drawer />
+      </Grid>
+      <Grid item>
+        {/* <div>
+          <h1>Dashboard</h1>
+          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+          <button onClick={handleProfilePhotoChange}>Upload</button>
+        </div> */}
+        <DashProvider />
+      </Grid>
+    </Grid>
   );
 };
 export default dashboard;

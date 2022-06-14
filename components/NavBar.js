@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { ModalContext } from "../context/modalProvider";
 import { useContext } from "react";
 import LogoutModal from "./modals/LogoutModal";
+
 const NavBar = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
@@ -40,7 +41,7 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" style={{ zIndex: 100 }}>
       <Grid container direction="row">
         <Grid item xs={6} md={3}>
           <h1>Logo</h1>
