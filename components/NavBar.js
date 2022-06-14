@@ -1,16 +1,24 @@
 import * as React from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Grid from "@mui/material/Grid";
 import { useAuth } from "../context/authContext";
 import { Avatar, Button } from "@mui/material";
 import { useRouter } from "next/router";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+
 const NavBar = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
   const tryLogout = () => {
     try {
       logout()
         .then(() => {
+          setAnchorEl(null);
           router.push("/login");
         })
         .catch((err) => {
@@ -20,6 +28,14 @@ const NavBar = () => {
       console.log("Error = ", error);
     }
   };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <AppBar position="static">
       <Grid container direction="row">
@@ -39,14 +55,31 @@ const NavBar = () => {
           >
             {user ? (
               <>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => tryLogout()}
+                <Avatar
+                  alt={user.displaName}
+                  src={user.photoURL}
+                  onClick={handleClick}
+                />
+                <Menu
+                  id="demo-positioned-menu"
+                  aria-labelledby="demo-positioned-button"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  style={{ marginTop: 50 + "px" }}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
                 >
-                  Log out
-                </Button>
-                <Avatar alt={user.displaName} src={user.photoURL} />
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>Settings</MenuItem>
+                  <MenuItem onClick={() => tryLogout()}>Logout</MenuItem>
+                </Menu>
               </>
             ) : (
               <>
