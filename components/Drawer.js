@@ -12,13 +12,10 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import Home from "./dashboards/Home";
 import { useContext } from "react";
-import { DashContext } from "../context/dashProvider";
 
 const drawerWidth = 240;
 
 const DrawerComponent = ({ children }) => {
-  const { openDash } = useContext(DashContext);
-
   return (
     <Drawer
       variant="permanent"

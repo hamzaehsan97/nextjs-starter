@@ -37,7 +37,6 @@ const dashboard = () => {
           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
           <button onClick={handleProfilePhotoChange}>Upload</button>
         </div> */}
-        <DashProvider />
       </Grid>
     </Grid>
   );
